@@ -89,7 +89,7 @@ function preload() {
     imgVector2 = loadImage('assets/Vector2.svg'); 
     
     // Load Sounds
-    bgMusic = loadSound('sounds/ambient_music_with_noise.wav');
+    bgMusic = loadSound('sounds/ambient_music_with_noise.mp3');
     bubbleSound = loadSound('sounds/bubble.wav');       
     coralClick1 = loadSound('sounds/coralclick.wav');   
     coralClick2 = loadSound('sounds/coralclick.wav');  
