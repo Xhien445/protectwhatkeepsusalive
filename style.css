@@ -1,0 +1,387 @@
+:root {
+  --blue: #0022FF;
+  --white: #FFFFFF;
+  --black: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 1. Áp dụng cursor mặc định cho toàn bộ trang và overlay */
+html, body, .overlay-container {
+  background: var(--black);
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  color: var(--white);
+  width: 100vw;    
+  height: 100vh;
+  overflow: hidden; 
+  
+  /* 🔥 QUAN TRỌNG: Thêm fallback 'default' nếu auto lỗi */
+  cursor: url('assets/cursor.svg'), auto; 
+}
+
+/* 2. Áp dụng pointer cho tất cả các loại nút */
+button, 
+.back-btn, 
+.more-btn, 
+.heat-btn, 
+.music-btn {
+  /* 🔥 QUAN TRỌNG: Thêm fallback 'pointer' chuẩn */
+  cursor: url('assets/pointer.svg'), pointer; 
+}
+
+button, 
+.back-btn, 
+.more-btn, 
+.heat-btn, 
+.music-btn {
+  cursor: url('assets/pointer.svg'), pointer; 
+}
+
+canvas {
+  display: block;
+  box-shadow: 0 0 50px rgba(0, 51, 255, 0.2);
+}
+
+.overlay-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: var(--black);
+  z-index: 9999;
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  scrollbar-width: none; 
+    opacity: 1;
+  visibility: visible;
+  transition:  opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; 
+}
+
+.overlay-container::-webkit-scrollbar { display: none; }
+
+.overlay-container.hidden {
+  opacity: 0;
+  visibility: hidden; 
+  pointer-events: none;
+}
+
+.poster {
+  width: 100%;
+  height: auto;  
+  min-height: 100vh; 
+  position: relative;
+  overflow: hidden;
+  
+  padding-bottom: 5vw; 
+}
+
+.blue { color: var(--blue); }
+.white { color: var(--white); }
+
+
+
+.back-btn {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  position: absolute;
+  top: 2.08vw;         
+  left: 6vw;
+  
+  padding: 0.4vw 1.25vw; 
+  border-radius: 50vw;
+  border: 2px solid var(--blue);   
+  background: transparent;         
+  color: var(--blue);              
+  font-size: 0.94vw;   
+  cursor: pointer;
+  transition: all 0.2s ease; 
+  z-index: 100;
+}
+
+.more-btn {
+  position: fixed; 
+  top: 50%;
+  bottom: auto; 
+  right: 2.08vw;
+  transform: translateY(-50%);
+  padding: 0.4vw 1.25vw; 
+  border-radius: 50vw;
+  border: 2px solid var(--blue);   
+  background: transparent;         
+  color: var(--blue);              
+  font-size: 0.94vw;   
+  cursor: pointer;
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  
+  z-index: 500;
+  transition: all 0.2s ease ;
+}
+
+.back-btn:hover {
+  color: var(--white); 
+  border: 2px solid var(--white); 
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 34, 255, 0.3);
+}
+.more-btn:hover {
+  color: var(--white); 
+  border: 2px solid var(--white); 
+  transform: translateY(-50%) scale(1.05); 
+}
+
+.main-title {
+  position: absolute;
+  top: 10.4vw;         
+  left: 6.25vw;      
+  font-family: "Notable", system-ui;
+  font-size: 5vw;  
+  line-height: 1.1;    
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.title-line { display: block; white-space: nowrap; }
+
+.left-explainer {
+  position: absolute;
+  top: 23.4vw;         
+  left: 6.25vw;        
+  width: 37.5vw;      
+  font-size: 1.35vw;   
+  line-height: 1.35;
+}
+.left-explainer strong { font-weight: 700; }
+
+.middle-heading {
+  position: absolute;
+  top: 52vw;           
+  right: 6.25vw;      
+  width: auto;
+  font-family: "Notable", system-ui;
+  font-size: 5vw;     
+  line-height: 1.1;
+  text-align: right;  
+}
+.mh-line { margin-bottom: 1.6vw; }
+
+.middle-body {
+  position: absolute;
+  top: 75.5vw;       
+  right: 6.25vw;     
+  width: 36.45vw;    
+  font-size: 1.35vw;  
+  line-height: 1.35;
+  text-align: right;
+}
+
+.sdg-block {
+  position: absolute;
+  top: 104vw;          
+  left: 6.25vw;      
+}
+
+.sdg-title {
+  font-family: "Notable", system-ui;
+  font-size: 5vw;      
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2.08vw; 
+}
+
+.sdg-desc {
+  font-family: "Notable";
+  font-size: 2vw;   
+  line-height: 1.2;
+  text-transform: uppercase;
+  width: 58.3vw;      
+}
+.sdg-desc span { display: block; }
+
+.team-block {
+  position: absolute;
+  top: 145.8vw;      
+  right: 5.7vw;      
+  text-align: right;
+  font-size: 1.5vw;  
+  line-height: 1.4;
+}
+
+.team-title {
+  font-size: 2.34vw;  
+  margin-bottom: 0.83vw; 
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 0.4vw;
+}
+.team-list span { display: block; }
+
+
+.footer-line {
+  position: absolute;
+  left: 6.25vw;
+  right: 6.25vw;
+  top: 162vw;      
+  height: 1px;         
+  background: #ffffff;  
+}
+
+.footer-left, .footer-right {
+  position: absolute;
+  font-size: 1vw;  
+  line-height: 1.4;
+    top: 164vw;        
+}
+
+.footer-left { left: 6.25vw; }
+.footer-right { right: 6.25vw; text-align: right; }
+.footer-left span, .footer-right span { display: block; }
+
+
+.poster {
+  height: 175vw; 
+}
+
+:root {
+  --blue: #0022FF;
+  --white: #FFFFFF;
+  --black: #000000;
+  --red: #FF0000; 
+}
+
+.blue {
+  color: var(--blue);
+  transition: color 5s ease-in-out; 
+}
+
+.more-btn, .back-btn {
+  
+  transition: transform 0.2s ease, color 5s ease-in-out, border-color 5s ease-in-out;
+}
+
+
+body.alert-active .blue {
+  color: var(--red) !important;
+}
+
+body.alert-active .more-btn,
+body.alert-active .back-btn {
+  color: var(--red) !important;
+  border-color: var(--red) !important;
+}
+
+body.alert-active .more-btn:hover,
+body.alert-active .back-btn:hover {
+  color: var(--white) !important;
+  border-color: var(--white) !important;
+}
+
+.heat-btn {
+  position: absolute;
+  top: 30px; 
+  left: 30px;
+  
+  width: 50px; 
+  height: 50px;
+  border-radius: 50px; 
+  
+  background-color: transparent; 
+  border: 2px solid #FF0000;    
+  color: #FF0000;               
+
+  cursor: pointer;
+  z-index: 1000;
+  
+  display: flex;
+  align-items: center;
+  padding-left: 11px; 
+  padding-right: 0;
+  
+  overflow: hidden; 
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.heat-btn img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0; 
+  transition: transform 0.3s ease;
+
+}
+
+.heat-btn span {
+  color: #FF0000; 
+  font-family: 'Atkinson Hyperlegible Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap; 
+  
+  opacity: 0;
+  max-width: 0; 
+  margin-left: 0;
+  transform: translateX(20px);
+  
+  transition: all 0.4s ease;
+}
+
+.heat-btn:hover {
+  width: 150px; 
+  padding-left: 18px; 
+  
+  background-color: rgba(255, 0, 0, 0.1); 
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); 
+}
+
+.heat-btn:hover img {
+  transform: scale(1.1); 
+}
+
+.heat-btn:hover span {
+  opacity: 1;      
+  max-width: 100px; 
+  margin-left: 10px; 
+  transform: translateX(0);
+}
+
+.heat-btn.active {
+  background-color: transparent !important; 
+  border-color: #0033FF !important;        
+  color: #0033FF !important;               
+}
+
+.heat-btn.active span {
+  color: #0033FF !important;
+}
+
+.heat-btn.active:hover {
+  width: 170px; 
+  background-color: rgba(0, 51, 255, 0.1) !important; 
+  box-shadow: 0 0 15px rgba(0, 51, 255, 0.4); 
+}
+
+.music-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px; 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; 
+  background-color: transparent;
+  border: none; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.1); 
+}
+
+.music-btn img {
+  width: 24px;
+  height: 24px;
+}
