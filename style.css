@@ -76,9 +76,8 @@ canvas {
   background: transparent;         
   color: var(--blue);              
   font-size: 0.94vw;   
-  cursor: pointer;
   transition: all 0.2s ease; 
-  z-index: 100;
+  z-index: 500;
 }
 
 .more-btn {
@@ -93,10 +92,8 @@ canvas {
   background: transparent;         
   color: var(--blue);              
   font-size: 0.94vw;   
-  cursor: pointer;
   font-family: "Atkinson Hyperlegible Mono", monospace;
   cursor: url('assets/pointer.svg'), pointer; 
-
   z-index: 500;
   transition: all 0.2s ease ;
 }
@@ -269,7 +266,6 @@ body.alert-active .back-btn:hover {
   background-color: transparent; 
   border: 2px solid #FF0000;    
   color: #FF0000;               
-  cursor: pointer;
   z-index: 1000;
   cursor: url('assets/pointer.svg'), pointer;
   display: flex;
@@ -350,7 +346,6 @@ body.alert-active .back-btn:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 1000;
   transition: transform 0.2s ease;
   cursor: url('assets/pointer.svg'), pointer;
@@ -367,7 +362,7 @@ body.alert-active .back-btn:hover {
 
 .img-wrapper {
   position: absolute;
-  cursor: pointer;
+  cursor: url('assets/pointer.svg'), pointer;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -430,4 +425,9 @@ body.alert-active .back-btn:hover {
 
 .img-wrapper:hover img {
   transform: scale(1.05); /* Zoom nhẹ hình */
+}
+
+.force-pointer {
+  /* 16 16 là tọa độ tâm của ảnh 32x32, giúp click chính xác hơn */
+  cursor: url('assets/pointer.svg') 16 16, pointer !important; 
 }
