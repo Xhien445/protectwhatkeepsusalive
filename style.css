@@ -10,35 +10,15 @@
   box-sizing: border-box;
 }
 
-/* 1. Áp dụng cursor mặc định cho toàn bộ trang và overlay */
-html, body, .overlay-container {
+/* Update this block */
+html, body, .overlay-container { /* Added .overlay-container here */
   background: var(--black);
   font-family: "Atkinson Hyperlegible Mono", monospace;
   color: var(--white);
   width: 100vw;    
   height: 100vh;
   overflow: hidden; 
-  
-  /* 🔥 QUAN TRỌNG: Thêm fallback 'default' nếu auto lỗi */
-  cursor: url('assets/cursor.svg'), auto; 
-}
-
-/* 2. Áp dụng pointer cho tất cả các loại nút */
-button, 
-.back-btn, 
-.more-btn, 
-.heat-btn, 
-.music-btn {
-  /* 🔥 QUAN TRỌNG: Thêm fallback 'pointer' chuẩn */
-  cursor: url('assets/pointer.svg'), pointer; 
-}
-
-button, 
-.back-btn, 
-.more-btn, 
-.heat-btn, 
-.music-btn {
-  cursor: url('assets/pointer.svg'), pointer; 
+  cursor: url('assets/cursor.svg'), auto; /* Ensures cursor shows on overlay too */
 }
 
 canvas {
@@ -58,6 +38,7 @@ canvas {
     opacity: 1;
   visibility: visible;
   transition:  opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; 
+  
 }
 
 .overlay-container::-webkit-scrollbar { display: none; }
@@ -88,7 +69,7 @@ canvas {
   position: absolute;
   top: 2.08vw;         
   left: 6vw;
-  
+  cursor: url('assets/pointer.svg'), pointer; 
   padding: 0.4vw 1.25vw; 
   border-radius: 50vw;
   border: 2px solid var(--blue);   
@@ -114,7 +95,8 @@ canvas {
   font-size: 0.94vw;   
   cursor: pointer;
   font-family: "Atkinson Hyperlegible Mono", monospace;
-  
+  cursor: url('assets/pointer.svg'), pointer; 
+
   z-index: 500;
   transition: all 0.2s ease ;
 }
@@ -281,23 +263,19 @@ body.alert-active .back-btn:hover {
   position: absolute;
   top: 30px; 
   left: 30px;
-  
   width: 50px; 
   height: 50px;
   border-radius: 50px; 
-  
   background-color: transparent; 
   border: 2px solid #FF0000;    
   color: #FF0000;               
-
   cursor: pointer;
   z-index: 1000;
-  
+  cursor: url('assets/pointer.svg'), pointer;
   display: flex;
   align-items: center;
   padding-left: 11px; 
   padding-right: 0;
-  
   overflow: hidden; 
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
 }
@@ -375,6 +353,7 @@ body.alert-active .back-btn:hover {
   cursor: pointer;
   z-index: 1000;
   transition: transform 0.2s ease;
+  cursor: url('assets/pointer.svg'), pointer;
 }
 
 .music-btn:hover {
@@ -384,4 +363,71 @@ body.alert-active .back-btn:hover {
 .music-btn img {
   width: 24px;
   height: 24px;
+}
+
+.img-wrapper {
+  position: absolute;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* --- VỊ TRÍ CÁC HÌNH --- */
+.img-top-right {
+  top: 23.4vw;
+  right: 6.25vw;
+  width: 42vw;
+}
+
+.img-middle-left {
+  top: 69vw;
+  left: 6.25vw;
+  width: 42vw;
+}
+
+.img-bottom-right {
+  top: 114vw;
+  right: 6.25vw;
+  width: 42vw;
+}
+
+/* --- LỚP PHỦ MÀU ĐEN (HOVER) --- */
+.hover-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Màu đen mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Mặc định ẩn */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Text tên thành viên */
+.hover-overlay span {
+  color: var(--white);
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-size: 1.5vw; 
+  text-align: center;
+  font-weight: bold;
+  padding: 1vw;
+  border: 1px solid var(--blue);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* --- HIỆU ỨNG KHI DI CHUỘT VÀO --- */
+.img-wrapper:hover .hover-overlay {
+  opacity: 1; /* Hiện lớp đen */
+}
+
+.img-wrapper:hover img {
+  transform: scale(1.05); /* Zoom nhẹ hình */
 }
