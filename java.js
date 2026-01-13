@@ -1,5 +1,6 @@
 let fontClimate, fontRoboto;
 let imgVector, imgVector2; 
+let cnv;
 
 // --- Audio Variables ---
 let bgMusic;
@@ -106,6 +107,10 @@ function setup() {
     colRed = color(hexRed);
     colCurrent = colBlue;
     
+
+    cnv = createCanvas(windowWidth, windowHeight); 
+
+    pixelDensity(2);
     // -----------------------------------------------------
     // 1. Heat Up Button
     // -----------------------------------------------------
@@ -236,9 +241,9 @@ function draw() {
     background(hexBlack);
 
     if (checkMouseInButton()) {
-        cursor('pointer'); 
+        cnv.addClass('force-pointer'); 
     } else {
-        cursor(ARROW);   
+        cnv.removeClass('force-pointer');  
     }
 
     // =================================================================
